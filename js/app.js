@@ -37,31 +37,60 @@ const categoryIdNews = async(id) => {
 // display news by category id
 const newsCountSection = document.getElementById('news-count-section');
 const newsContainerSection = document.getElementById('news-container');
-const displayNews = async(news) => {
-    console.log(news);
-    if(news.length !== 0){
-        newsCountSection.innerText = `You have ${news.length} news to read in this category`;
+const displayNews = async(newses) => {
+    newsContainerSection.textContent = ``;
+    // console.log(newses);
+    if(newses.length !== 0){
+        newsCountSection.innerText = `You have ${newses.length} news to read in this category`;
     }
     else{
         newsCountSection.innerText = `You have no news to read in this category`;
     }
 
-    // display news in container
-    newsContainerSection.innerHTML =`
-    <div class="card mb-3">
-    <div class="row g-0">
-      <div class="col-md-4 col-sm-12">
-        <img src="..." class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-8 col-sm-12">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-    </div>
-  </div>
-    `
+    // looping through newses array to get news
+    for (const news of newses){
+        console.log(news);
+        const newsDiv = document.createElement('div');
+        newsDiv.classList.add('card');
+        newsDiv.classList.add('mb-3');
+        newsDiv.innerHTML = `
+        <div class="row g-0">
+          <div class="col-md-4 col-sm-12">
+            <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8 col-sm-12">
+            <div class="card-body">
+              <h5 class="card-title">${news.title}</h5>
+              <p id="news-details" class="card-text">${news.details}</p>
 
+              <section class="d-flex justify-content-between">
+            <div class="d-flex">
+                <div class="pt-1">
+                    <img class="rounded-circle" style="height:40px; width:40px" src="${news.author.img}" alt="..">
+                </div>
+                <div class="ms-2">
+                    <p class="fw-bold h5">${news.author.name !== null ? news.author.name : 'No Author Found'}</p>
+                    <p class="text-muted">${news.author.published_date ? news.author.published_date.slice(0,11) : 'No publish date'}</p>
+                </div>
+            </div>
+            <div>
+                <p class="card-text fw-bold h5"><small class="text-muted"><i class="fa-solid fa-eye px-2"></i>${news.total_view !== null ? news.total_view : 'No Views Found'}</small></p>
+            </div>
+            <div>
+                <i class="fa-solid fa-star"></i> 
+                <i class="fa-solid fa-star"></i> 
+                <i class="fa-solid fa-star"></i> 
+                <i class="fa-solid fa-star"></i> 
+                <i class="fa-regular fa-star-half-stroke"></i>
+            </div>
+            <div class="fw-bold h3">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </section>
+            </div>
+          </div>
+        </div>
+        `;
+        newsContainerSection.appendChild(newsDiv);
+    }
 }
