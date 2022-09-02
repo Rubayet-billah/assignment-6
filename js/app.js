@@ -39,12 +39,12 @@ const newsCountSection = document.getElementById('news-count-section');
 const displayNews = async(news) => {
     console.log(news);
     if(news.length !== 0){
-        newsCountSection.innerText = `
-            <p>You have ${news.length} news to read in this category</p>
-        `;
+        newsCountSection.innerText = `You have ${news.length} news to read in this category`;
     }
     else{
-
+        newsCountSection.innerText = `
+           You have no news to read in this category
+        `;
     }
 
 }
