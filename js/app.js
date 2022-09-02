@@ -65,7 +65,8 @@ const displayNews = async(newses) => {
         newsDiv.classList.add('card');
         newsDiv.classList.add('mb-3');
         newsDiv.innerHTML = `
-        <div class="row g-0">
+
+        <div class="row g-0" data-bs-toggle="modal" data-bs-target="#newsDetails">
           <div class="col-md-4 col-sm-12">
             <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="...">
           </div>
@@ -104,5 +105,12 @@ const displayNews = async(newses) => {
         `;
         newsContainerSection.appendChild(newsDiv);
         loadSpinner(false);
+
+        // modal section
+        document.getElementById('newsDetailsLabel').innerText = `${news.title}`;
+        document.getElementById('author-name').innerText = `Author Name: ${news.author.name !== null ? news.author.name : 'No Author Found'}`;
+        document.getElementById('others-info').innerHTML = `
+            <p>Todays pick: ${news.others_info.is_todays_pick}</p>
+        `;
     }
 }
