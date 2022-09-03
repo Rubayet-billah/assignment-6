@@ -1,169 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Latest Bulletin</title>
-    <!-- bootstrap link  -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-      crossorigin="anonymous"
-    />
-    <!-- internal CSS style -->
-    <style>
-      .target-category {
-        padding: 2px 10px 5px;
-        background-color: rgb(237, 237, 237);
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-      }
-    </style>
-    <!-- fontawesome link  -->
-    <script
-      src="https://kit.fontawesome.com/1178c5c565.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
 
-  <body>
-    <!-- ----header section start---- -->
-    <header class="container mt-3">
-      <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <h3 class="fw-bold">
-              Latest <span class="text-danger">Bulletin</span>
-            </h3>
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Latest Bulletin</title>
+  <!-- bootstrap link  -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+  <!-- internal CSS style -->
+  <style>
+    .target-category {
+      padding: 2px 10px 5px;
+      background-color: rgb(237, 237, 237);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+    }
+  </style>
+  <!-- fontawesome link  -->
+  <script src="https://kit.fontawesome.com/1178c5c565.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- ----header section start---- -->
+  <header class="container mt-3">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <h3 class="fw-bold">
+            Latest <span class="text-danger">Bulletin</span>
+          </h3>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="blog.html">Blog</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <hr />
+    <!-- news section tile start -->
+    <section class="my-3">
+      <ul id="news-title" class="d-flex justify-content-between justify-content-md-start flex-wrap list-unstyled h5">
+      </ul>
+    </section>
+    <!-- news section tile end -->
+    <section class="bg-light rounded p-3 h5" style="min-height: 60px">
+      <div id="news-count-section"></div>
+    </section>
+
+    <!-- extra  -->
+    <section class="mt-5">
+      <div class="container d-flex justify-content-between my-3">
+        <div>
+          <h4>
+            Sort By View:
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" aria-expanded="false">
+              Default
+            </button>
+          </h4>
+        </div>
+        <div>
+          <button type="button" class="btn btn-danger mx-3 fw-bold">
+            Today’s Pick
           </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="blog.html">Blog</a>
-              </li>
-            </ul>
-          </div>
+          <button type="button" class="btn border-2 bg-white">
+            Trending
+          </button>
         </div>
-      </nav>
-      <hr />
-      <!-- news section tile start -->
-      <section class="my-3">
-        <ul
-          id="news-title"
-          class="d-flex justify-content-between justify-content-md-start flex-wrap list-unstyled h5"
-        ></ul>
-      </section>
-      <!-- news section tile end -->
-      <section class="bg-light rounded p-3 h5" style="min-height: 60px">
-        <div id="news-count-section"></div>
-      </section>
+      </div>
+    </section>
+    <!-- extra  -->
+  </header>
+  <!-- ----header section end---- -->
 
-      <!-- extra  -->
-      <section class="mt-5">
-        <div class="container d-flex justify-content-between my-3">
-          <div>
-            <h4>
-              Sort By View:
-              <button
-                class="btn btn-outline-secondary dropdown-toggle"
-                type="button"
-                aria-expanded="false"
-              >
-                Default
-              </button>
-            </h4>
+  <!-- ----main section start---- -->
+  <main class="container my-5">
+    <section id="news-container"></section>
+
+    <!-- spinner section  -->
+    <section id="spinner" class="d-none">
+      <div style="height: 300px" class="d-flex justify-content-center align-items-center">
+        <div class="spinner-border text-danger" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="newsDetails" tabindex="-1" aria-labelledby="newsDetailsLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="news-title-modal"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div>
-            <button type="button" class="btn btn-danger mx-3 fw-bold">
-              Today’s Pick
+          <div class="modal-body">
+            <div id="others-info" class="mt-3"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
             </button>
-            <button type="button" class="btn border-2 bg-white">
-              Trending
-            </button>
-          </div>
-        </div>
-      </section>
-      <!-- extra  -->
-    </header>
-    <!-- ----header section end---- -->
-
-    <!-- ----main section start---- -->
-    <main class="container my-5">
-      <section id="news-container"></section>
-
-      <!-- spinner section  -->
-      <section id="spinner" class="d-none">
-        <div
-          style="height: 300px"
-          class="d-flex justify-content-center align-items-center"
-        >
-          <div class="spinner-border text-danger" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Button trigger modal -->
-
-      <!-- Modal -->
-      <div
-        class="modal fade"
-        id="newsDetails"
-        tabindex="-1"
-        aria-labelledby="newsDetailsLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="newsDetailsLabel"></h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <div id="news-title-modal" class="h5"></div>
-              <div id="others-info"></div>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
           </div>
         </div>
       </div>
-    </main>
-    <!-- ----main section end---- -->
+    </div>
+  </main>
+  <!-- ----main section end---- -->
 
-    <script src="js/app.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+
+
+  <script src="js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

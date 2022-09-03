@@ -74,45 +74,29 @@ const displayNews = (newses) => {
 
         <div class="row g-0">
           <div class="col-md-4 col-sm-12">
-            <img src="${
-              news.thumbnail_url
-            }" class="img-fluid rounded-start" alt="...">
+            <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="...">
           </div>
           <div class="col-md-8 col-sm-12">
             <div class="card-body">
               <h5 class="card-title">${news.title}</h5>
-              <p id="news-details" class="card-text">${
-                news.details.length >= 400
-                  ? news.details.slice(0, 400) + "..."
-                  : news.details
-              }</p>
+              <p id="news-details" class="card-text">${news.details.length >= 400
+        ? news.details.slice(0, 400) + "..."
+        : news.details}</p>
 
           <section class="d-flex justify-content-between flex-wrap">
             <div class="d-flex">
                 <div class="pt-1">
-                    <img class="rounded-circle" style="height:40px; width:40px" src="${
-                      news.author.img
-                    }" alt="..">
+                    <img class="rounded-circle" style="height:40px; width:40px" src="${news.author.img}" alt="..">
                 </div>
                 <div class="ms-2">
-                    <p class="fw-bold h5">${
-                      news.author.name !== null
-                        ? news.author.name !== ""
-                          ? news.author.name
-                          : "No Author Found"
-                        : "No Author Found"
-                    }</p>
-                    <p class="text-muted">${
-                      news.author.published_date
-                        ? news.author.published_date.slice(0, 11)
-                        : "No publish date"
-                    }</p>
+                    <p class="fw-bold h5">${news.author.name ? news.author.name : "No Author Found"}</p>
+                    <p class="text-muted">${news.author.published_date
+        ? news.author.published_date.slice(0, 11)
+        : "No publish date"}</p>
                 </div>
             </div>
             <div>
-                <p class="card-text fw-bold h5"><small class="text-muted"><i class="fa-solid fa-eye px-2"></i>${
-                  news.total_view !== null ? news.total_view : "No Views Found"
-                }</small></p>
+                <p class="card-text fw-bold h5"><small class="text-muted"><i class="fa-solid fa-eye px-2"></i>${news.total_view !== null ? news.total_view : "No Views Found"}</small></p>
             </div>
             <div>
                 <i class="fa-solid fa-star"></i> 
@@ -122,9 +106,7 @@ const displayNews = (newses) => {
                 <i class="fa-regular fa-star-half-stroke"></i>
             </div>
             <div class="fw-bold">
-                <button onclick="getDetailsModal('${
-                  news._id
-                }')" class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#newsDetails">Details</button>
+                <button onclick="getDetailsModal('${news._id}')" class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#newsDetails">Details</button>
             </div>
         </section>
             </div>
@@ -136,7 +118,7 @@ const displayNews = (newses) => {
   });
 };
 
-categoryIdNews("01");
+// categoryIdNews("01");
 
 // get specific news by id
 const getDetailsModal = async (newsId) => {
@@ -152,29 +134,25 @@ const getDetailsModal = async (newsId) => {
 
 // display modal function
 const displayModal = (bulletin) => {
-  // console.log(bulletin);
+  console.log(bulletin);
   document.getElementById("news-title-modal").innerText = `${bulletin.title}`;
   document.getElementById("others-info").innerHTML = `
         <img src="${bulletin.image_url}" class="img-fluid">
         <p class="mt-2">${bulletin.details}</p>
-        <p class="fw-bold h5">Author Name: ${
-          bulletin.author.name !== null
-            ? bulletin.author.name
-            : "No Author Found"
-        }</p>
-        <p class="text-muted">Published date: ${
-          bulletin.author.published_date
-            ? bulletin.author.published_date.slice(0, 11)
-            : "No publish date"
-        }</p>
-        <p>Trending: ${
-          bulletin.others_info.is_trending === true ? "Yes" : "No"
-        }</p>
-        <p>Rating: ${
-          bulletin.rating.number ? bulletin.rating.number : "Not found"
-        }</p>
-        <p><i class="fa-solid fa-eye pe-1"></i> ${
-          bulletin.total_view ? bulletin.total_view : "No views found"
-        }</p>
+        <section class="d-flex align-items-center">
+      <div>
+        <p class="fw-bold h5">
+          Author Name: ${bulletin.author.name ? bulletin.author.name : "No Author Found"}
+        </p>
+        <p class="text-muted"> Published date: ${bulletin.author.published_date ? bulletin.author.published_date.slice(0, 11) : "No publish date"}
+        </p>
+      </div>
+      <div class="w-50">
+        <img class="w-50 d-block mx-auto rounded" src="${bulletin.author.img}" alt="..." />
+      </div>
+    </section>
+        <p>Trending: ${bulletin.others_info.is_trending === true ? "Yes" : "No"}</p>
+        <p>Rating: ${bulletin.rating.number ? bulletin.rating.number : "Not found"}</p>
+        <p><i class="fa-solid fa-eye pe-1"></i> ${bulletin.total_view ? bulletin.total_view : "No views found"}</p>
     `;
 };
