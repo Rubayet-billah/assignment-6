@@ -48,7 +48,7 @@ const categoryIdNews = async(id) => {
 // display news by category id
 const newsCountSection = document.getElementById('news-count-section');
 const newsContainerSection = document.getElementById('news-container');
-const displayNews = async(newses) => {
+const displayNews = (newses) => {
     newsContainerSection.textContent = ``;
     // console.log(newses);
     if(newses.length !== 0){
@@ -60,13 +60,13 @@ const displayNews = async(newses) => {
 
     // looping through newses array to get news
     for (const news of newses){
-        console.log(news);
+        // console.log(news);
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('card');
         newsDiv.classList.add('mb-3');
         newsDiv.innerHTML = `
 
-        <div class="row g-0" data-bs-toggle="modal" data-bs-target="#newsDetails">
+        <div class="row g-0">
           <div class="col-md-4 col-sm-12">
             <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="...">
           </div>
@@ -95,8 +95,8 @@ const displayNews = async(newses) => {
                 <i class="fa-solid fa-star"></i> 
                 <i class="fa-regular fa-star-half-stroke"></i>
             </div>
-            <div class="fw-bold h3">
-                <i class="fa-solid fa-arrow-right"></i>
+            <div class="fw-bold">
+                <button onclick="getDetailsModal('${news._id}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsDetails">Details</button>
             </div>
         </section>
             </div>
@@ -105,12 +105,14 @@ const displayNews = async(newses) => {
         `;
         newsContainerSection.appendChild(newsDiv);
         loadSpinner(false);
-
-        // modal section
-        document.getElementById('newsDetailsLabel').innerText = `${news.title}`;
-        document.getElementById('author-name').innerText = `Author Name: ${news.author.name !== null ? news.author.name : 'No Author Found'}`;
-        document.getElementById('others-info').innerHTML = `
-            <p>Todays pick: ${news.others_info.is_todays_pick}</p>
-        `;
     }
+}
+
+
+// get specific news by id
+const getDetailsModal = async(newsId) => {
+    const url = `https://openapi.programming-hero.com/api/news/${newsId}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    console.log(data.data[0]);
 }
