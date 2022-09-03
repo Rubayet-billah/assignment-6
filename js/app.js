@@ -62,8 +62,8 @@ const displayNews = (newses) => {
         newsCountSection.innerText = `You have no news to read in this category`;
     }
 
-    // looping through newses array to get news
-    for (const news of newses){
+    // looping through newses array to get news using forEach
+    newses.forEach(news => {
         // console.log(news);
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('card');
@@ -109,7 +109,7 @@ const displayNews = (newses) => {
         `;
         newsContainerSection.appendChild(newsDiv);
         loadSpinner(false);
-    }
+    })
 }
 
 
