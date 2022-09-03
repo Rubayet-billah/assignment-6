@@ -124,7 +124,7 @@ const displayNews = (newses) => {
             <div class="fw-bold">
                 <button onclick="getDetailsModal('${
                   news._id
-                }')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsDetails">Details</button>
+                }')" class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#newsDetails">Details</button>
             </div>
         </section>
             </div>
