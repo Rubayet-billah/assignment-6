@@ -58,9 +58,9 @@ const displayNews = (newses) => {
   newsContainerSection.textContent = ``;
   // console.log(newses);
   if (newses.length !== 0) {
-    newsCountSection.innerText = `You have ${newses.length} news to read in this category`;
+    newsCountSection.innerHTML = `You have <span class="fw-bolder">${newses.length}</span> news to read in this category`;
   } else {
-    newsCountSection.innerText = `You have no news to read in this category`;
+    newsCountSection.innerHTML = `<span class="text-danger">You have no news to read in this category</span>`;
   }
 
   // looping through newses array to get news using forEach
