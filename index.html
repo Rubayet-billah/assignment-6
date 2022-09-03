@@ -14,7 +14,7 @@
     <!-- internal CSS style -->
     <style>
       .target-category {
-        padding: 10px 10px 0;
+        padding: 2px 10px 5px;
         background-color: rgb(237, 237, 237);
         border-radius: 10px;
         display: flex;
@@ -55,7 +55,7 @@
                 <a class="nav-link" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" target="_blank" href="blog.html">Blog</a>
+                <a class="nav-link" href="blog.html">Blog</a>
               </li>
             </ul>
           </div>
@@ -73,6 +73,33 @@
       <section class="bg-light rounded p-3 h5" style="min-height: 60px">
         <div id="news-count-section"></div>
       </section>
+
+      <!-- extra  -->
+      <section class="mt-5">
+        <div class="container d-flex justify-content-between my-3">
+          <div>
+            <h4>
+              Sort By View:
+              <button
+                class="btn btn-outline-secondary dropdown-toggle"
+                type="button"
+                aria-expanded="false"
+              >
+                Default
+              </button>
+            </h4>
+          </div>
+          <div>
+            <button type="button" class="btn btn-danger mx-3 fw-bold">
+              Today’s Pick
+            </button>
+            <button type="button" class="btn border-2 bg-white">
+              Trending
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- extra  -->
     </header>
     <!-- ----header section end---- -->
 

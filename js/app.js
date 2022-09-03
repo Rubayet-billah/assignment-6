@@ -16,7 +16,7 @@ const newsCategoris = (categories) => {
     li.classList.add("m-2");
     li.classList.add("target-category");
     li.innerHTML = `
-            <p onclick= "categoryIdNews('${category.category_id}')">${category.category_name}</p>   
+            <a class="text-decoration-none" onclick= "categoryIdNews('${category.category_id}')">${category.category_name}</a>   
         `;
     newsCategoryContainer.appendChild(li);
   });
@@ -61,6 +61,7 @@ const displayNews = (newses) => {
     newsCountSection.innerHTML = `You have <span class="fw-bolder">${newses.length}</span> news to read in this category`;
   } else {
     newsCountSection.innerHTML = `<span class="text-danger">You have no news to read in this category</span>`;
+    loadSpinner(false);
   }
 
   // looping through newses array to get news using forEach
@@ -86,7 +87,7 @@ const displayNews = (newses) => {
                   : news.details
               }</p>
 
-              <section class="d-flex justify-content-between flex-wrap">
+          <section class="d-flex justify-content-between flex-wrap">
             <div class="d-flex">
                 <div class="pt-1">
                     <img class="rounded-circle" style="height:40px; width:40px" src="${
@@ -96,7 +97,9 @@ const displayNews = (newses) => {
                 <div class="ms-2">
                     <p class="fw-bold h5">${
                       news.author.name !== null
-                        ? news.author.name
+                        ? news.author.name !== ""
+                          ? news.author.name
+                          : "No Author Found"
                         : "No Author Found"
                     }</p>
                     <p class="text-muted">${
@@ -132,6 +135,8 @@ const displayNews = (newses) => {
     loadSpinner(false);
   });
 };
+
+categoryIdNews("01");
 
 // get specific news by id
 const getDetailsModal = async (newsId) => {
