@@ -41,7 +41,11 @@ const categoryIdNews = async(id) => {
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
     const res = await fetch(url);
     const data = await res.json();
-    displayNews(data.data)
+    // sorting array
+    const arr = data.data;
+    arr.sort((a,b)=>(a.total_view < b.total_view) ? 1 : -1);
+    // display sorted array
+    displayNews(arr);
 }
 
 
@@ -120,7 +124,7 @@ const getDetailsModal = async(newsId) => {
 
 // display modal function
 const displayModal = (bulletin) => {
-    console.log(bulletin.details.length);
+    // console.log(bulletin);
     document.getElementById('news-title-modal').innerText = `${bulletin.title}`
     document.getElementById('others-info').innerHTML = `
         <img src="${bulletin.image_url}" class="img-fluid">
