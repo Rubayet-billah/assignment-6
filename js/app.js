@@ -1,3 +1,4 @@
+// load news categories function
 const loadNews = async () => {
   const url = `https://openapi.programming-hero.com/api/news/categories`;
   try {
@@ -118,7 +119,8 @@ const displayNews = (newses) => {
   });
 };
 
-// categoryIdNews("01");
+// show news 01 category by default
+categoryIdNews("01");
 
 // get specific news by id
 const getDetailsModal = async (newsId) => {
@@ -134,7 +136,7 @@ const getDetailsModal = async (newsId) => {
 
 // display modal function
 const displayModal = (bulletin) => {
-  console.log(bulletin);
+  // console.log(bulletin);
   document.getElementById("news-title-modal").innerText = `${bulletin.title}`;
   document.getElementById("others-info").innerHTML = `
         <img src="${bulletin.image_url}" class="img-fluid">
