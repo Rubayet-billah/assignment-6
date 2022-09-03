@@ -73,7 +73,7 @@ const displayNews = (newses) => {
           <div class="col-md-8 col-sm-12">
             <div class="card-body">
               <h5 class="card-title">${news.title}</h5>
-              <p id="news-details" class="card-text">${news.details}</p>
+              <p id="news-details" class="card-text">${news.details.length >= 400 ? news.details.slice(0, 400) + '...': news.details }</p>
 
               <section class="d-flex justify-content-between">
             <div class="d-flex">
@@ -114,5 +114,21 @@ const getDetailsModal = async(newsId) => {
     const url = `https://openapi.programming-hero.com/api/news/${newsId}`;
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data.data[0]);
+    displayModal(data.data[0]);
+}
+
+
+// display modal function
+const displayModal = (bulletin) => {
+    console.log(bulletin.details.length);
+    document.getElementById('news-title-modal').innerText = `${bulletin.title}`
+    document.getElementById('others-info').innerHTML = `
+        <img src="${bulletin.image_url}" class="img-fluid">
+        <p class="mt-2">${bulletin.details}</p>
+        <p class="fw-bold h5">Author Name: ${bulletin.author.name !== null ? bulletin.author.name : 'No Author Found'}</p>
+        <p class="text-muted">Published date: ${bulletin.author.published_date ? bulletin.author.published_date.slice(0,11) : 'No publish date'}</p>
+        <p>Trending: ${bulletin.others_info.is_trending === true ? 'Yes' : 'No'}</p>
+        <p>Rating: ${bulletin.rating.number ? bulletin.rating.number : 'Not found'}</p>
+        <p><i class="fa-solid fa-eye pe-1"></i> ${bulletin.total_view ? bulletin.total_view : 'No views found'}</p>
+    `
 }
