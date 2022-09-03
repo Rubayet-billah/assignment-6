@@ -1,15 +1,18 @@
 const loadNews = async() => {
     const url = `https://openapi.programming-hero.com/api/news/categories`
-    const res = await fetch(url);
-    const data = await res.json();
-    newsCategoris(data.data.news_category)
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        newsCategoris(data.data.news_category);
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
 const newsCategoryContainer = document.getElementById('news-title');
 const newsCategoris = (categories) => {
     // console.log(categories)
-    for(const category of categories){
-        // console.log(category.category_id);
-
+    categories.forEach(category => {
         const li = document.createElement('li');
         li.classList.add('m-2');
         li.classList.add('target-category');
@@ -17,7 +20,7 @@ const newsCategoris = (categories) => {
             <p onclick= "categoryIdNews('${category.category_id}')">${category.category_name}</p>   
         `;
         newsCategoryContainer.appendChild(li);
-    }
+    })
 }
 
 
@@ -39,13 +42,18 @@ const loadSpinner = isLoading => {
 const categoryIdNews = async(id) => {
     loadSpinner(true);
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    // sorting array
-    const arr = data.data;
-    arr.sort((a,b)=>(a.total_view < b.total_view) ? 1 : -1);
-    // display sorted array
-    displayNews(arr);
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        // sorting array
+        const arr = data.data;
+        arr.sort((a,b)=>(a.total_view < b.total_view) ? 1 : -1);
+        // display sorted array
+        displayNews(arr);
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
 
 
@@ -79,7 +87,7 @@ const displayNews = (newses) => {
               <h5 class="card-title">${news.title}</h5>
               <p id="news-details" class="card-text">${news.details.length >= 400 ? news.details.slice(0, 400) + '...': news.details }</p>
 
-              <section class="d-flex justify-content-between">
+              <section class="d-flex justify-content-between flex-wrap">
             <div class="d-flex">
                 <div class="pt-1">
                     <img class="rounded-circle" style="height:40px; width:40px" src="${news.author.img}" alt="..">
@@ -116,9 +124,14 @@ const displayNews = (newses) => {
 // get specific news by id
 const getDetailsModal = async(newsId) => {
     const url = `https://openapi.programming-hero.com/api/news/${newsId}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    displayModal(data.data[0]);
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        displayModal(data.data[0]);
+    }
+    catch (error) {
+        console.log(error)
+    } 
 }
 
 
